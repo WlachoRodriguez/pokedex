@@ -1,5 +1,21 @@
-# Vue 3 + TypeScript + Vite
+# Pokedex
+![Mask Group](https://github.com/user-attachments/assets/c9b82826-6232-4c2a-96a9-db9f20e3d207)
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+### Versiones usadas:
+- node: v20.11.1
+- npm: 10.2.4
+- vuejs: 3
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+### Empezamos ejecutando:
+
+```bash
+npm install
+```
+
+```bash
+npm run dev
+```
+
+### Como se creo Pokedex
+
+En este proyecto, se priorizó la adopción de buenas prácticas, como la separación de responsabilidades, la evitación de la duplicación de código y la simplicidad, manteniendo al mismo tiempo la eficiencia. 
