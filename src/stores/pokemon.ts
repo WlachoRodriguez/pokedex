@@ -1,12 +1,19 @@
 import { defineStore } from "pinia";
+import { View } from "@/types/view";
+import type { Pokemon } from "@/types/Pokemon";
 
 export const usePokemonStore = defineStore("pokemon", {
   state: () => ({
-    favorites: [] as any[],
+    pokemons: [] as Pokemon[],
+    view: View.HOME,
   }),
   actions: {
-    addFavorite(favorite: any) {
-      this.favorites.push(favorite);
+    addPokemons(pokemos: Pokemon[]) {
+      this.pokemons = pokemos;
+    },
+    addFavorite(name: string, favorite: boolean) {
+      const pokemon = this.pokemons.find((p) => p.name === name);
+      if (pokemon) pokemon.favorite = favorite;
     },
   },
 });

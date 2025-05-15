@@ -1,11 +1,21 @@
 <script setup lang="ts">
+import { usePokemonStore } from "@/stores/pokemon";
+
 const props = defineProps<{
+  name: string;
   icon: string;
+  favorite: boolean;
 }>();
+
+const pokemon = usePokemonStore();
+
+const addFavorite = () => {
+  pokemon.addFavorite(props.name, !props.favorite);
+};
 </script>
 
 <template>
-  <div class="content-icon">
+  <div class="content-icon" @click="addFavorite">
     <img :src="props.icon" class="icon" />
   </div>
 </template>
@@ -19,6 +29,7 @@ const props = defineProps<{
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 }
 
 .icon {

@@ -2,17 +2,31 @@
 import StarDefault from "@/assets/starDefault.svg";
 import StarActive from "@/assets/starActive.svg";
 import Star from "@/components/ui/Icon/Star.vue";
+import type { Pokemon } from "@/types/Pokemon";
 
 const props = defineProps<{
-  name: string;
-  favorite: boolean;
+  pokemon: Pokemon;
 }>();
+
+const emit = defineEmits(["open"]);
+const handleClick = () => {
+  emit("open", props.pokemon);
+};
 </script>
 
 <template>
-  <div class="item">
-    <span class="item-name">{{ props.name }}</span>
-    <Star :icon="props.favorite ? StarActive : StarDefault" />
+  <div class="item" @click="handleClick">
+    <span class="item-name">{{ props.pokemon.name }}</span>
+    <Star
+      @click="
+        (e) => {
+          e.stopPropagation();
+        }
+      "
+      :icon="props.pokemon.favorite ? StarActive : StarDefault"
+      :name="props.pokemon.name"
+      :favorite="props.pokemon.favorite"
+    />
   </div>
 </template>
 
@@ -32,5 +46,7 @@ const props = defineProps<{
   font-size: 22px;
   font-weight: 500;
   color: #333;
+  height: 100%;
+  display: block;
 }
 </style>

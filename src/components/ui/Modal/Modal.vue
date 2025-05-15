@@ -1,20 +1,25 @@
 <script setup lang="ts">
 import starActive from "@/assets/starActive.svg";
+import starDefault from "@/assets/starDefault.svg";
 import closeIcon from "@/assets/close.svg";
 import Button from "@/components/ui/Button/Button.vue";
 import Star from "@/components/ui/Icon/Star.vue";
+import type { PokemonDetail } from "@/types/Pokemon";
 
 const props = defineProps<{
-  name: string;
-  weight: number;
-  height: number;
-  types: string[];
+  pokemon: PokemonDetail;
 }>();
 
 const emit = defineEmits(["close"]);
 
 const close = () => {
   emit("close");
+};
+
+const share = async () => {
+  await navigator.clipboard.writeText(
+    `Name: ${props.pokemon.name}, Image: ${props.pokemon.image}, Weight: ${props.pokemon.weight}, Height: ${props.pokemon.height}, Types: ${props.pokemon.types}, Favorite: ${props.pokemon.favorite}`
+  );
 };
 </script>
 
@@ -24,18 +29,27 @@ const close = () => {
       <img :src="closeIcon" class="modal-close" @click="close" />
       <div class="modal-header">
         <img src="@/assets/background.png" />
+        <img :src="props.pokemon.image" class="pokemon" />
       </div>
 
       <div class="modal-body">
-        <p><strong>Name:</strong> {{ props.name }}</p>
-        <p><strong>Weight:</strong> {{ props.weight }}</p>
-        <p><strong>Height:</strong> {{ props.height }}</p>
-        <p><strong>Types:</strong> {{ props.types.join(", ") }}</p>
+        <p><strong>Name:</strong> {{ props.pokemon.name }}</p>
+        <p><strong>Weight:</strong> {{ props.pokemon.weight }}</p>
+        <p><strong>Height:</strong> {{ props.pokemon.height }}</p>
+        <p><strong>Types:</strong> {{ props.pokemon.types.join(", ") }}</p>
       </div>
 
       <div class="modal-footer">
-        <Button name="Share to my friends" type="primary"></Button>
-        <Star :icon="starActive" />
+        <Button
+          name="Share to my friends"
+          type="primary"
+          @click="share"
+        ></Button>
+        <Star
+          :icon="props.pokemon.favorite ? starActive : starDefault"
+          :name="props.pokemon.name"
+          :favorite="props.pokemon.favorite"
+        />
       </div>
     </div>
   </div>
@@ -72,10 +86,17 @@ const close = () => {
 }
 
 .modal-header {
+  position: relative;
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.pokemon {
+  position: absolute;
+  height: 180px;
+  width: 180px;
 }
 
 .modal-body {

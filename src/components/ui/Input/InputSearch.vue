@@ -24,12 +24,11 @@ const value = computed({
 
 <style scoped>
 div {
-  width: auto;
+  width: 100%;
   border-radius: 5px;
   display: flex;
   align-items: center;
   background-color: #ffffff;
-  border-radius: 8px;
   padding: 16px 15px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
@@ -48,6 +47,7 @@ div > input {
   font-size: 22px;
   background-color: transparent;
   color: #333;
+  width: 100%;
 }
 
 div > input::placeholder {
